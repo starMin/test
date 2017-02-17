@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href = "../css/detail.css">
+		<title></title>
+	</head>
+	<body>
+		<div class = "box">
+			<div class = "header">
+				<p>详情页</p><span><img src="../img/car.jpg"/></span>
+			</div>
+			<div class = "logo">
+				<img  class="one" src = "../img/商品列表_07.jpg">
+				<img src = "../img/商品列表_09.jpg">
+				<img src = "../img/商品列表_11.jpg">
+				<img src = "../img/商品列表_13.jpg">
+				<img src = "../img/商品列表_15.jpg">
+				<img src = "../img/商品列表_17.jpg">
+				<img src = "../img/商品列表_19.jpg">
+				<img src = "../img/商品列表_21.jpg">
+				<img src = "../img/商品列表_23.jpg">
+				<img src = "../img/商品列表_25.jpg">
+			</div>
+			<div class = "content">
+				<div class="list"></div>
+			</div>
+			<div class = "footer">
+				<ul>
+					<li class="te">
+						<img src = "../img/商品列表_36.jpg">
+						<p>首页</p>
+					</li>
+					<li>
+						<img src = "../img/商品列表_37.jpg">
+						<p>分类</p>
+					</li>
+					<li>
+						<img src = "../img/商品列表_39.jpg">
+						<p>购物车</p>
+					</li>
+					<li>
+						<img src = "../img/商品列表_40.jpg">
+						<p>我的秀</p>
+					</li>
+					<li>
+						<img src = "../img/商品列表_41.jpg">
+						<p>更多</p>
+					</li>
+				</ul>
+				
+			</div>
+		</div>
+		<script src = "../js/zepto.js"></script>
+		<script src = "../js/zepto-touch.js"></script>
+		<script>
+			$(function(){
+				if(window.localStorage.getItem("goodsID")){
+					var goodsID = window.localStorage.getItem("goodsID");
+					console.log(goodsID);
+				}
+				if(window.localStorage.getItem("userID")){
+					var userID = window.localStorage.getItem("userID");
+				}
+				var currentCar = null;
+				var numberC = 0;
+				$(document).ready(function(){
+					$.ajax({
+						type:"get",
+						url:"http://datainfo.duapp.com/shopdata/getGoods.php",
+						async:true,
+						dataType:"jsonp",
+						data:{
+							goodsID:goodsID,
+						},
+						success:function(data){
+							//console.log(data);
+							var result = data[0];
+							//console.log(result);
+								$(".list").append("<img src = '"+result.goodsListImg+"'><p>"+result.detail+"</p><div class = 'numA'><span class = 'add'>+</span><span class = 'num'>1</span><span class = 'reduce'>-</span></div><button class = 'addCar'>加入购物车</button>");
+							$(".addCar").click(function(){
+								for(var i = 0;i < currentCar.length;i++){
+									if(goodsID == currentCar[i].goodsID){
+										numberC = parseInt(currentCar[i].number);
+									}
+								}
+								$.ajax({
+									type:"get",
+									url:"http://datainfo.duapp.com/shopdata/updatecar.php",
+									async:true,
+									data:{
+										userID:userID,
+										goodsID:goodsID,
+										number:numberC + parseInt($(".num").html()),
+										
+									},
+									success:function(data){
+										if(data == 1){
+											alert("添加购物车成功");
+											window.location.href = "shopcar.html";
+										}
+									}
+								});
+							})
+								$(".add").click(function(){
+								$(".num").html(parseInt($(".num").html())+1);
+								})
+								$(".reduce").click(function(){
+									if($(".num").html() > 0){
+										$(".num").html(parseInt($(".num").html()) - 1);
+									}else{
+										$(".num").html("0"); 
+									}
+								})
+								$.ajax({
+									type:"get",
+									url:"http://datainfo.duapp.com/shopdata/getCar.php",
+									async:true,
+									data:{
+										userID:userID,
+									},
+									success:function(data){
+										//console.log(data);
+										currentCar = data;
+									}
+								});
+						}
+						
+					});
+					
+				})
+			})
+		</script>
+	</body>
+</html>

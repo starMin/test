@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src = "../js/zepto.js"></script>
+		<script src = "../js/zepto-touch.js"></script>
+		<link rel = "stylesheet" type = "text/css" href = "../css/regist.css">
+		<title></title>
+	</head>
+	<body>
+		<div class="box">
+			<div class="header">
+				<img src = "../img/1.jpg"/>
+				<span>用户注册</span>
+			</div>
+			<div class="main">
+				<div class="total">
+					账户名称：<input id = "username" type="text" placeholder = "请输入账户"><span id = 'span1'></span><br />
+					登录密码：<input id = "password1" type="password" placeholder = "请输入密码"><span id = 'span2'></span><br />
+					确认密码：<input id = "password2" type="password" placeholder = "请输入密码"><span id = 'span3'></span><br />
+				</div>
+				<div class="regist">确定注册</div>
+			</div>
+		</div>
+		<script>
+			$(function(){		
+				var flag = true;
+				$("#username").blur(function(){
+					if($("#username").val() == ""){
+						$("#span1").html("用户名不能为空");
+						$("#span1").css("color","red");
+					}
+					/*if(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/.test($(this).val())){
+						$("#span1").html("格式正确");
+						$("#span1").css("color","green");
+					}else{
+						$("#span1").html("手机号错误");
+						$("#span1").css("color","red");
+					}*/
+				})
+				$("#password1").blur(function(){
+					if($("#password1").val() == ""){
+						flag = false;
+						$("#span2").html("密码不能为空");
+						$("#span2").css("color","red");
+					}
+					else if(this.value.length > 6 && this.value.length < 16){
+						$("#span2").html("密码长度正确");
+						if(/^\d+$/.test(this.value)){
+							$("#span2").html("密码强度弱");
+							$("#span2").css("color","orange")
+						}else if(/\d/.test(this.value) && /[a-z]/.test(this.value) && /[A-Z]/.test(this.value)){
+							$("#span2").html("密码强度强");
+							$("#span2").css("color","green");
+						}
+						flag = true;
+					}else{
+						$("#span2").html("密码长度应该是6-16位");
+					$("#span2").css("color","red");
+					flag = false;
+					}
+				})
+				$("#password2").blur(function(){
+					if($("#password2").val() == ""){
+						flag = false;
+						$("#span3").html("密码不能为空");
+						$("#span3").css("color","red");
+					}
+					else if($(this).val() == $("#password1").val()){
+						$("#span3").html("密码一致");
+						$("#span3").css("color","green");
+						flag = true;
+					}else{
+						$("#span3").html("密码不一致");
+						$("#span3").css("color","red");
+						flag = false;
+					}
+				})
+				$(".regist").tap(function(){
+					if(flag == true){
+						$.ajax({
+							type:"get",
+							url:"http://datainfo.duapp.com/shopdata/userinfo.php",
+							async:true,
+							data:{
+								status:"register",
+								userID:$("#username").val(),
+								password:$("#password1").val(),
+								
+							},
+							success:function(data){
+								if(data == 0){
+									$("#span1").html("对不起，该用户已注册");
+								}else if(data == 1){
+									alert("恭喜，注册成功");
+									window.location.href = "login.html";
+								}else if(data == 2){
+									alert("格式有问题");
+								}
+							}
+						});
+					
+					}
+						
+				})
+			})
+		</script>
+	</body>
+</html>

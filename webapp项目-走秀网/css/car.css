@@ -1,0 +1,118 @@
+*{
+	margin:0;
+	padding:0;
+}
+html,body,.box{
+	height:100%;
+}
+body{
+	font-size:16px;
+}
+.box{
+	width:6.4rem;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+.header{
+	width:6.4rem;
+	height:10% ;
+	background: #AB1B1A;
+	text-align: center;
+	position:relative;
+}
+.car{
+	position: absolute;
+	left:40%;
+	top:35%;
+	color:white;
+	font-size:20px;
+}
+.pic{
+	position: absolute;
+	top:30%;
+	right:10%;
+}
+.pic img{
+	width:60px;
+}
+.content{
+	width:100%;
+	-webkit-box-flex: 1;
+	overflow: scroll;
+}
+.goodLists{
+	overflow: auto;
+	margin-top:0.2rem;
+}
+.goodLists li{
+	width:100%;
+	list-style: none;
+	height:250px;
+}
+.goodLists li .left{
+	float:left;
+	width:48%;
+	
+}
+.left input{
+	width:20%;
+}
+.goodLists li .right{
+	float:right;
+	width:48%;
+	margin-left:0.01rem;
+}
+.goodLists li .right p{
+	font-size:16px;
+	margin-top:0.2rem;
+	margin-bottom:0.2rem;
+}
+.goodLists li .right button{
+	width:30px;
+	height:30px;
+}
+.goodLists li .right .btn2{
+	margin-left:0.1rem;
+	margin-right:0.1rem;
+}
+.goodLists li img{
+	width:150px;
+	height:150px;
+}
+.remove{
+	width:50px;
+	height:20px;
+	text-align: center;
+	line-height: 20px;
+	background:#FD316C;
+	margin-left:0.6rem;
+	margin-top:0.4rem;
+	color:white;
+}
+.footer{
+	width:100%;
+	height: 60px;
+	background:#484850 ;
+}
+.footer ul{
+	width:100%;
+	height: 60px;
+	
+}
+.footer ul li{
+	list-style: none;
+	float:left;
+	width:20%;
+	text-align: center;
+}
+.te{
+	/*margin-left:4px;*/
+}
+.footer ul li img{
+	width:40px;
+	height:40px;
+}
+.footer ul li p{
+	color:#FFFFFF;
+}

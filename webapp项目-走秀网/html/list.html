@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href = "../css/list.css">
+		<title></title>
+	</head>
+	<body>
+		<div class = "box">
+			<div class = "header">
+				<p>新品上市</p><span><img src="../img/car.jpg"/></span>
+			</div>
+			<div class = "logo">
+				<img  class="one" src = "../img/商品列表_07.jpg">
+				<img src = "../img/商品列表_09.jpg">
+				<img src = "../img/商品列表_11.jpg">
+				<img src = "../img/商品列表_13.jpg">
+				<img src = "../img/商品列表_15.jpg">
+				<img src = "../img/商品列表_17.jpg">
+				<img src = "../img/商品列表_19.jpg">
+				<img src = "../img/商品列表_21.jpg">
+				<img src = "../img/商品列表_23.jpg">
+				<img src = "../img/商品列表_25.jpg">
+			</div>
+			<div class = "content">
+				<ul class="list"></ul>
+			</div>
+			<div class = "footer">
+				<ul>
+					<li class="te">
+						<img src = "../img/商品列表_36.jpg">
+						<p>首页</p>
+					</li>
+					<li>
+						<img src = "../img/商品列表_37.jpg">
+						<p>分类</p>
+					</li>
+					<li>
+						<img src = "../img/商品列表_39.jpg">
+						<p>购物车</p>
+					</li>
+					<li>
+						<img src = "../img/商品列表_40.jpg">
+						<p>我的秀</p>
+					</li>
+					<li>
+						<img src = "../img/商品列表_41.jpg">
+						<p>更多</p>
+					</li>
+				</ul>
+				
+			</div>
+		</div>
+		<script src = "../js/zepto.js"></script>
+		<script src = "../js/zepto-touch.js"></script>
+		<script>
+			$(function(){
+				$.ajax({
+					type:"get",
+					url:"http://datainfo.duapp.com/shopdata/getGoods.php",
+					async:true,
+					data:{},
+					dataType:"jsonp",
+					success:function(data){
+						//console.log(data);
+						
+						for(var i = 0;i < data.length;i++){
+							var img = JSON.parse(data[i].imgsUrl)[0];
+							$(".list").append("<li><p><img src = '"+img+"'</p><h3>"+data[i].goodsName+"<span>"+data[i].price+"</span></h3></li>")
+						}
+					},
+				})
+				
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,73 @@
+*{
+	margin:0;
+	padding: 0;
+}
+html,body,.box{
+	width:100%;
+	height:100%;
+}
+.box{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+}
+.header{
+	height:60px;
+	width:100%;
+	background:#AC1C1B ;
+	text-align: center;
+	line-height: 60px;
+	font-size:26px;
+	color: #fff;
+}
+.main{
+	width:100%;
+	-webkit-box-flex: 1;
+}
+.main .input{
+	width:200px;
+	height:30px;
+	margin-top:30px;
+}
+.main .checkbox{
+	margin-top:50px;
+	margin-left:12px;
+	font-size:20px;
+}
+.main .checkbox input{
+	width:20px;
+	height: 20px;
+}
+.main .checkbox .span1{
+	color:#FD316C;
+	font-size:20px;
+	margin-left:20px;
+}
+.main .checkbox .checkbox1{
+	margin-top:30px;
+}
+.main .total{
+	margin-top:50px;
+}
+.main .total p{
+	width:340px;
+	height:50px;
+	background:#AC1C1B ;
+	border-radius: 5px;
+	text-align: center;
+	color:#fff;
+	line-height: 50px;
+	font-size:26px;
+}
+.main .total a{
+	text-decoration: none;
+	width:340px;
+	height:50px;
+	background:#313131 ;
+	border-radius: 5px;
+	text-align: center;
+	color:#fff;
+	line-height: 50px;
+	font-size:26px;
+	display: block;
+	margin-top:10px;
+}
